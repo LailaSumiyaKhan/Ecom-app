@@ -38,4 +38,5 @@ class CuponController extends Controller
             Cupon::deleteCupon($id);
             return back()->with('message','Cupon info delete successfully');
         }
+
 }
