@@ -45,7 +45,13 @@ class CartController extends Controller
     }
     public function applyCupon(Request $request)
     {
-      $this->cupon = Cupon::where('name',$request->coupon)->first();
+       
+//      $this->cupon = Cupon::where('name',$request->coupon)->first();
+//      if ($this->cupon)
+//      {
+//          $sum = 0;
+//          foreach (ShoppingCart::all())
+//      }
     }
 }
 
