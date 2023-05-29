@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CuponController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Route::get('/show-cart', [CartController::class,'show'])->name('show-cart');
 Route::get('/remove-cart-product/{id}', [CartController::class,'remove'])->name('remove-cart-product');
 Route::post('/update-cart-product/{id}', [CartController::class,'update'])->name('update-cart-product');
 Route::post('/apply-cupon', [CartController::class,'applyCupon'])->name('apply-cupon');
+Route::get('/checkout', [CheckoutController::class,'index'])->name('checkout');
+Route::post('/new-order', [CheckoutController::class,'newOrder'])->name('new-order');
 
 Route::middleware([
     'auth:sanctum',

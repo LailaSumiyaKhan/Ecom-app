@@ -213,41 +213,41 @@
             </div>
             <div class="row">
                 @foreach($products as $product)
-                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="col-lg-3 col-md-6 col-12">
 
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="{{asset($product->image)}}" alt="#" height="220">
-                            <form action="{{route('add-to-cart',['id'=>$product->id])}}" method="post">
-                                @csrf
-                                <input type="hidden" name="qty" value="1"/>
-                                <div class="button">
-                                    <button type="submit" class="btn"><i class="lni lni-cart"></i> Add to Cart</button>
+                        <div class="single-product">
+                            <div class="product-image">
+                                <img src="{{asset($product->image)}}" alt="#" height="220">
+                                <form action="{{route('add-to-cart',['id'=>$product->id])}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="qty" value="1"/>
+                                    <div class="button">
+                                        <button type="submit" class="btn"><i class="lni lni-cart"></i> Add to Cart</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                            <div class="product-info">
+                                <span class="category">{{$product->category->name}}</span>
+                                <h4 class="title">
+                                    <a href="{{route('product-detail',['id'=>$product->id])}}">{{$product->name}}</a>
+                                </h4>
+                                <ul class="review">
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star"></i></li>
+                                    <li><span>4.0 Review(s)</span></li>
+                                </ul>
+                                <div class="price">
+                                    <span>TK. {{$product->selling_price}}</span>
                                 </div>
-
-                            </form>
-
-                        </div>
-                        <div class="product-info">
-                            <span class="category">{{$product->category->name}}</span>
-                            <h4 class="title">
-                                <a href="{{route('product-detail',['id'=>$product->id])}}">{{$product->name}}</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star"></i></li>
-                                <li><span>4.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>TK. {{$product->selling_price}}</span>
                             </div>
                         </div>
-                    </div>
 
-                </div>
+                    </div>
                 @endforeach
 
             </div>
@@ -430,27 +430,8 @@
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry incididunt ut
                                 eiusmod tempor labores.</p>
                         </div>
-                        <div class="box-head">
-                            <div class="box">
-                                <h1 id="days">000</h1>
-                                <h2 id="daystxt">Days</h2>
-                            </div>
-                            <div class="box">
-                                <h1 id="hours">00</h1>
-                                <h2 id="hourstxt">Hours</h2>
-                            </div>
-                            <div class="box">
-                                <h1 id="minutes">00</h1>
-                                <h2 id="minutestxt">Minutes</h2>
-                            </div>
-                            <div class="box">
-                                <h1 id="seconds">00</h1>
-                                <h2 id="secondstxt">Secondes</h2>
-                            </div>
-                        </div>
-                        <div style="background: rgb(204, 24, 24);" class="alert">
-                            <h1 style="padding: 50px 80px;color: white;">We are sorry, Event ended ! </h1>
-                        </div>
+
+
                     </div>
                 </div>
             </div>
