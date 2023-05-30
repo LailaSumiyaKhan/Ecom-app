@@ -20,45 +20,32 @@ class CheckoutController extends Controller
     }
     public function newOrder(Request $request)
     {
-      $this->customer = new Customer();
-      $this->customer->name = $request->name;
-      $this->customer->email  = $request->email;
-      $this->customer->password = bcrypt($request->mobile);
-      $this->customer->mobile  = $request->mobile;
-        $this->customer->save();
-
-        $this->order = new Order();
-        $this->order->customer_id = $this->customer->id;
-        $this->order->order_total = Session::get('order_total');
-        $this->order->tax_amount = Session::get('tax_amount');
-        $this->order->shipping_amount =Session::get('shipping_amount');
-        if (Session::get('cupon_amount'))
-        {
-            $this->order->discount_amount = Session::get('cupon_amount');
-            $this->order->cupon_name = Session::get('cupon_name');
-        }
-
-        $this->order->order_date = date('y-m-d');
-        $this->order->order_timestamp = strtotime(date('y-m-d'));
-        $this->order->payment_type = $request->payment_type;
-        $this->order->delivery_address = $request->delivery_address;
-        $this->order->save();
-
-        foreach (ShoppingCart::all() as $item)
-        {
-            $this->orderDetail = new OrderDetail();
-            $this->orderDetail->order_id = $this->order->id;
-            $this->orderDetail->product_id = $item->id;
-            $this->orderDetail->product_name =$item->name;
-            $this->orderDetail->product_price = $item->price;
-            $this->orderDetail->product_qty =$item->qty;
-            $this->orderDetail->save();
-
-            ShoppingCart::remove($item->__raw_id);
-        }
-        return 'success';
+        $this->validate($request,[
+           'name'=> 'required',
+           'email'=> 'required|unique:customers,email',
+           'mobile'=> 'required|unique:customers,mobile',
+           'delivery_address'=> 'required',
+    ] ,[
+        'name.required'=> 'please enter your name',
+        'email.required'=> 'please enter your Email',
+        'email.unique'=> 'This Email has already been used',
+            ]);
 
 
+        $this->customer = Customer::newCustomer($request);
+        Session::put('customer_id',$this->customer->id);
+        Session::put('customer_name',$this->customer->name);
+
+
+        $this->order = Order::newOrder($request,$this->customer->id);
+        OrderDetail::newOrderDetail($this->order->id);
+        return redirect('/complete-order');
+
+
+    }
+    public function completeOrder()
+    {
+        return view('website.checkout.complete-order');
     }
 
 }

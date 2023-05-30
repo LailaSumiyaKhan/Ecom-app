@@ -40,10 +40,11 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="single-form form-default">
-                                                    <label>Full Name</label>
+                                                    <label>Full Name<span class="text-danger">*</span></label>
                                                     <div class="row">
                                                         <div class="col-md-12 form-input form">
-                                                            <input type="text" name="name" placeholder="First Name">
+                                                            <input type="text" name="name" placeholder="First Name"/>
+                                                            <span class="text-danger">{{$errors->has('name') ? $errors->first('name') : " "}}</span>
                                                         </div>
 
                                                     </div>
@@ -51,25 +52,28 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="single-form form-default">
-                                                    <label>Email Address</label>
+                                                    <label>Email Address<span class="text-danger">*</span></label>
                                                     <div class="form-input form">
                                                         <input type="text" name="email" placeholder="Email Address">
+                                                        <span class="text-danger">{{$errors->has('email') ? $errors->first('email') : " "}}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="single-form form-default">
-                                                    <label>Phone Number</label>
+                                                    <label>Phone Number<span class="text-danger">*</span></label>
                                                     <div class="form-input form">
                                                         <input type="text" name="mobile" placeholder="Phone Number">
+                                                        <span class="text-danger">{{$errors->has('mobile') ? $errors->first('mobile') : " "}}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="single-form form-default">
-                                                    <label>Delivery Address</label>
+                                                    <label>Delivery Address<span class="text-danger">*</span></label>
                                                     <div class="form-input form">
                                                         <textarea name="delivery_address" placeholder="Order Delivery Address"></textarea>
+                                                        <span class="text-danger">{{$errors->has('delivery_address') ? $errors->first('delivery_address') : " "}}</span>
                                                     </div>
                                                 </div>
                                             </div>

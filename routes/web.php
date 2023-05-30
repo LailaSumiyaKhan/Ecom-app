@@ -11,6 +11,8 @@ use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CuponController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CustomerAuthController;
+use App\Http\Controllers\CustomerDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +35,12 @@ Route::post('/update-cart-product/{id}', [CartController::class,'update'])->name
 Route::post('/apply-cupon', [CartController::class,'applyCupon'])->name('apply-cupon');
 Route::get('/checkout', [CheckoutController::class,'index'])->name('checkout');
 Route::post('/new-order', [CheckoutController::class,'newOrder'])->name('new-order');
+Route::get('/complete-order', [CheckoutController::class,'completeOrder'])->name('complete-order');
+Route::get('/customer-login', [CustomerAuthController::class,'index'])->name('customer-login');
+Route::post('/customer-login', [CustomerAuthController::class,'login'])->name('customer-login');
+Route::get('/customer-register', [CustomerAuthController::class,'register'])->name('customer-register');
+Route::get('/customer-logout', [CustomerAuthController::class,'logout'])->name('customer-logout');
+Route::get('/customer-dashboard', [CustomerDashboardController::class,'index'])->name('customer-dashboard');
 
 Route::middleware([
     'auth:sanctum',
