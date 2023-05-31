@@ -28,7 +28,18 @@
     <div class="account-login section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+                <div class="col-sm-3">
+                    <div class="card card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a href="{{route('customer-dashboard')}}">My Dashboard</a></li>
+                            <li class="list-group-item"><a href="{{route('customer-profile')}}">My Profile</a></li>
+                            <li class="list-group-item"><a href="{{route('customer-order')}}">My Order</a></li>
+                            <li class="list-group-item"><a href="">My Account</a></li>
+                            <li class="list-group-item"><a href="">Change Password</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-9">
                     <h1>My Dashboard</h1>
                 </div>
             </div>

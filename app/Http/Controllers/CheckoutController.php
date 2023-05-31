@@ -16,26 +16,42 @@ class CheckoutController extends Controller
     private $order,$orderDetail,$customer;
     public function index()
     {
-        return view('website.checkout.index',['cart_products'=> ShoppingCart::all()]);
+        if (Session::get('customer_id'))
+        {
+            $this->customer = Customer::find(Session::get('customer_id'));
+        }
+        else
+        {
+            $this->customer ='';
+        }
+
+
+        return view('website.checkout.index',['cart_products'=> ShoppingCart::all(),'customer'=>$this->customer]);
     }
     public function newOrder(Request $request)
     {
-        $this->validate($request,[
-           'name'=> 'required',
-           'email'=> 'required|unique:customers,email',
-           'mobile'=> 'required|unique:customers,mobile',
-           'delivery_address'=> 'required',
-    ] ,[
-        'name.required'=> 'please enter your name',
-        'email.required'=> 'please enter your Email',
-        'email.unique'=> 'This Email has already been used',
+        if (Session::get('customer_id'))
+        {
+            $this->customer = Customer::find(Session::get('customer_id'));
+        }
+        else
+        {
+            $this->validate($request,[
+                'name'=> 'required',
+                'email'=> 'required|unique:customers,email',
+                'mobile'=> 'required|unique:customers,mobile',
+                'delivery_address'=> 'required',
+            ] ,[
+                'name.required'=> 'please enter your name',
+                'email.required'=> 'please enter your Email',
+                'email.unique'=> 'This Email has already been used',
             ]);
 
+            $this->customer = Customer::newCustomer($request);
+            Session::put('customer_id',$this->customer->id);
+            Session::put('customer_name',$this->customer->name);
 
-        $this->customer = Customer::newCustomer($request);
-        Session::put('customer_id',$this->customer->id);
-        Session::put('customer_name',$this->customer->name);
-
+        }
 
         $this->order = Order::newOrder($request,$this->customer->id);
         OrderDetail::newOrderDetail($this->order->id);

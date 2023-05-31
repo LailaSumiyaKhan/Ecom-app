@@ -40,7 +40,17 @@ Route::get('/customer-login', [CustomerAuthController::class,'index'])->name('cu
 Route::post('/customer-login', [CustomerAuthController::class,'login'])->name('customer-login');
 Route::get('/customer-register', [CustomerAuthController::class,'register'])->name('customer-register');
 Route::get('/customer-logout', [CustomerAuthController::class,'logout'])->name('customer-logout');
-Route::get('/customer-dashboard', [CustomerDashboardController::class,'index'])->name('customer-dashboard');
+
+
+Route::middleware(['customer'])->group(function () {
+    
+    Route::get('/customer-dashboard', [CustomerDashboardController::class,'index'])->name('customer-dashboard');
+    Route::get('/my-profile', [CustomerDashboardController::class,'profie'])->name('customer-profile');
+    Route::post('/update-my-profile', [CustomerDashboardController::class,'updateProfile'])->name('update-customer-profile');
+    Route::get('/my-order', [CustomerDashboardController::class,'order'])->name('customer-order')->middleware('customer');
+
+});
+
 
 Route::middleware([
     'auth:sanctum',

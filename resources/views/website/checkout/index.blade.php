@@ -43,8 +43,13 @@
                                                     <label>Full Name<span class="text-danger">*</span></label>
                                                     <div class="row">
                                                         <div class="col-md-12 form-input form">
-                                                            <input type="text" name="name" placeholder="First Name"/>
-                                                            <span class="text-danger">{{$errors->has('name') ? $errors->first('name') : " "}}</span>
+                                                            @if($customer)
+                                                                <input type="text" name="name" value="{{$customer->name}}" readonly placeholder="First Name"/>
+                                                            @else
+                                                                <input type="text" name="name" placeholder="First Name"/>
+                                                                <span class="text-danger">{{$errors->has('name') ? $errors->first('name') : " "}}</span>
+                                                            @endif
+
                                                         </div>
 
                                                     </div>
@@ -54,8 +59,13 @@
                                                 <div class="single-form form-default">
                                                     <label>Email Address<span class="text-danger">*</span></label>
                                                     <div class="form-input form">
-                                                        <input type="text" name="email" placeholder="Email Address">
-                                                        <span class="text-danger">{{$errors->has('email') ? $errors->first('email') : " "}}</span>
+                                                        @if($customer)
+                                                            <input type="email" name="email" value="{{$customer->email}}" readonly placeholder="Email Address">
+                                                        @else
+                                                            <input type="text" name="email" placeholder="Email Address">
+                                                            <span class="text-danger">{{$errors->has('email') ? $errors->first('email') : " "}}</span>
+                                                        @endif
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -63,8 +73,13 @@
                                                 <div class="single-form form-default">
                                                     <label>Phone Number<span class="text-danger">*</span></label>
                                                     <div class="form-input form">
-                                                        <input type="text" name="mobile" placeholder="Phone Number">
-                                                        <span class="text-danger">{{$errors->has('mobile') ? $errors->first('mobile') : " "}}</span>
+                                                        @if($customer)
+                                                            <input type="number" name="mobile" value="{{$customer->mobile}}" readonly placeholder="Phone Number">
+                                                        @else
+                                                            <input type="number" name="mobile" placeholder="Phone Number">
+                                                            <span class="text-danger">{{$errors->has('mobile') ? $errors->first('mobile') : " "}}</span>
+                                                        @endif
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -72,7 +87,7 @@
                                                 <div class="single-form form-default">
                                                     <label>Delivery Address<span class="text-danger">*</span></label>
                                                     <div class="form-input form">
-                                                        <textarea name="delivery_address" placeholder="Order Delivery Address"></textarea>
+                                                        <textarea name="delivery_address" placeholder="Order Delivery Address" style="padding-top: 7px"></textarea>
                                                         <span class="text-danger">{{$errors->has('delivery_address') ? $errors->first('delivery_address') : " "}}</span>
                                                     </div>
                                                 </div>

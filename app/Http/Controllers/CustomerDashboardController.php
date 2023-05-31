@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Session;
 
 class CustomerDashboardController extends Controller
 {
@@ -13,7 +16,18 @@ class CustomerDashboardController extends Controller
     }
     public function profie()
     {
-        return view('website.customer.profile');
+        return view('website.customer.profile',['customer'=>Customer::find(Session::get('customer_id'))]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        Customer::updateCustomer($request);
+        return back()->with('message','Profile info update successfully');
+    }
+
+    public function order()
+    {
+        return view('website.customer.order',['orders'=> Order::where('customer_id',Session::get('customer_id'))->get()]);
     }
     public function changePassword()
     {
