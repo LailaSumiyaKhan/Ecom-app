@@ -52,16 +52,28 @@ class CheckoutController extends Controller
             Session::put('customer_name',$this->customer->name);
 
         }
+        if ($request->payment_type == 1)
+        {
 
-        $this->order = Order::newOrder($request,$this->customer->id);
-        OrderDetail::newOrderDetail($this->order->id);
-        return redirect('/complete-order');
 
+            $this->order = Order::newOrder($request,$this->customer->id);
+            OrderDetail::newOrderDetail($this->order->id);
+            return redirect('/complete-order');
+        }
+        else
+        {
+            return view('website.checkout.exampleHosted',[
+                'customer'=>$this->customer,
+                'address'=>$request->delivery_address,
+                'cart_products'=>ShoppingCart::all(),
+                ]);
+        }
 
     }
     public function completeOrder()
     {
         return view('website.checkout.complete-order');
     }
+
 
 }
