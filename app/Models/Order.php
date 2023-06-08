@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
 use Session;
 
 class Order extends Model
 {
     use HasFactory;
-    private static $order;
+    private static $order,$product;
     public  static function newOrder($request,$customerId)
     {
         self::$order = new Order();
@@ -30,5 +31,66 @@ class Order extends Model
         self::$order->save();
         return self::$order;
     }
+    public static function updateOrderInfo($request)
+    {
+
+      self::$order = Order::find($request->order_id);
+      if ($request->order_status == 'pending')
+      {
+         return back();
+      }
+       else if ($request->order_status == 'Processing')
+        {
+            self::$order->delivery_address = $request->delivery_address;
+            self::$order->order_status     = $request->order_status;
+            self::$order->payment_status  = $request->order_status;
+            self::$order->delivery_status = $request->order_status;
+            self::$order->save();
+
+        }
+       else if ($request->order_status == 'Complete')
+        {
+
+            self::$order->order_status           = $request->order_status;
+            self::$order->payment_status         = $request->order_status;
+            self::$order->delivery_status       = $request->order_status;
+            self::$order->save();
+
+            foreach (self::$order->orderDetails as $orderDetail)
+            {
+                self::$product =  Product::find($orderDetail->product_id);
+                if (self::$product) {
+                    self::$product->stock_amount =  self::$product->stock_amount - $orderDetail->product_qty;
+                    self::$product->save();
+                }
+            }
+        }
+       else if ($request->order_status == 'Cancel')
+        {
+            self::$order->order_status           = $request->order_status;
+            self::$order->payment_status         = $request->order_status;
+            self::$order->delivery_status       = $request->order_status;
+            self::$order->save();
+        }
+    }
+    public static function deleteOrder($id)
+    {
+        self::$order = Order::find($id);
+        foreach (self::$order->orderDetails as $orderDetail)
+        {
+            $orderDetail->delete();
+        }
+        self::$order->delete();
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
+
 
 }

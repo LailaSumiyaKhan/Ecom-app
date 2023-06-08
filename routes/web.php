@@ -13,6 +13,8 @@ use App\Http\Controllers\CuponController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\CustomerDashboardController;
+use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\SubsubcategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +45,7 @@ Route::get('/customer-logout', [CustomerAuthController::class,'logout'])->name('
 
 
 Route::middleware(['customer'])->group(function () {
-    
+
     Route::get('/customer-dashboard', [CustomerDashboardController::class,'index'])->name('customer-dashboard');
     Route::get('/my-profile', [CustomerDashboardController::class,'profie'])->name('customer-profile');
     Route::post('/update-my-profile', [CustomerDashboardController::class,'updateProfile'])->name('update-customer-profile');
@@ -71,6 +73,14 @@ Route::middleware([
     Route::get('/sub-category/edit/{id}',[SubcategoryController::class,'edit'])->name('sub-category.edit');
     Route::post('/sub-category/update/{id}',[SubcategoryController::class,'update'])->name('sub-category.update');
     Route::get('/sub-category/delete/{id}',[SubcategoryController::class,'delete'])->name('sub-category.delete');
+
+    Route::get('/sub-subcategory/add',[SubsubcategoryController::class,'index'])->name('sub-subcategory.add');
+    Route::post('/sub-subcategory/create',[SubsubcategoryController::class,'create'])->name('sub-subcategory.create');
+    Route::get('/sub-subcategory/manage',[SubsubcategoryController::class,'manage'])->name('sub-subcategory.manage');
+    Route::get('/sub-subcategory/edit{id}',[SubsubcategoryController::class,'edit'])->name('sub-subcategory.edit');
+    Route::post('/sub-subcategory/update{id}',[SubsubcategoryController::class,'update'])->name('sub-subcategory.update');
+    Route::get('/sub-subcategory/delete{id}',[SubsubcategoryController::class,'delete'])->name('sub-subcategory.delete');
+
 
 
     Route::get('/brand/add',[BrandController::class,'index'])->name('brand.add');
@@ -100,5 +110,13 @@ Route::middleware([
     Route::get('/cupon/manage',[CuponController::class,'manage'])->name('cupon.manage');
     Route::get('/cupon/edit/{id}',[CuponController::class,'edit'])->name('cupon.edit');
     Route::get('/cupon/delete/{id}',[CuponController::class,'update'])->name('cupon.delete');
+
+    Route::get('/admin/manage-order',[AdminOrderController::class,'index'])->name('admin.manage-order');
+    Route::get('/admin/order-detail/{id}',[AdminOrderController::class,'detail'])->name('admin.order-detail');
+    Route::get('/admin/order-edit/{id}',[AdminOrderController::class,'edit'])->name('admin.order-edit');
+    Route::post('/admin/order-update',[AdminOrderController::class,'update'])->name('admin.order-update');
+    Route::get('/admin/order-invoice/{id}',[AdminOrderController::class,'invoice'])->name('admin.order-invoice');
+    Route::get('/admin/download-order-invoice/{id}',[AdminOrderController::class,'downloadInvoice'])->name('admin.download-invoice');
+    Route::get('/admin/order-delete/{id}',[AdminOrderController::class,'delete'])->name('admin.order-delete');
 
 });

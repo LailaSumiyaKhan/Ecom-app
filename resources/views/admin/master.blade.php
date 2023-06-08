@@ -474,6 +474,17 @@
 
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-store"></i>
+                            <span>Sub-Sub Category Module</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('sub-subcategory.add')}}">Add Sub-Sub Category</a></li>
+                            <li><a href="{{route('sub-subcategory.manage')}}">Manage Sub-Sub Category</a></li>
+
+                        </ul>
+                    </li>
 
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -506,7 +517,7 @@
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="{{route('product.add')}}">Add Product</a></li>
                             <li><a href="{{route('product.manage')}}">Manage Product</a></li>
-                            <li><a href="{{route('cupon.manage')}}">Manage Cupon</a></li>
+
                         </ul>
                     </li>
 
@@ -517,6 +528,18 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="{{route('cupon.add')}}">Add Cupon</a></li>
+                            <li><a href="{{route('cupon.manage')}}">Manage Cupon</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-briefcase-alt-2"></i>
+                            <span>Order Module</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('admin.manage-order')}}">Manage Order</a></li>
 
                         </ul>
                     </li>

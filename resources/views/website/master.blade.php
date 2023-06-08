@@ -233,12 +233,29 @@
                                         @endif
                                     </a>
 
-                                    <ul class="inner-sub-category">
-                                        @foreach($category->subCategories as $subcategory)
-                                            <li><a href="product-grids.html">{{$subcategory->name}}</a></li>
-                                        @endforeach
+                                    @if(count($category->subCategories) > 0)
+                                        <ul class="inner-sub-category">
+                                            @foreach($category->subCategories as $subcategory)
+                                                <li>
+                                                    <a href="product-grids.html">{{$subcategory->name}}
+                                                        @if(count($subcategory->subsubCategories) > 0)
+                                                            <i class="lni lni-chevron-right"></i>
+                                                        @endif
+                                                    </a>
 
-                                    </ul>
+
+                                                        <ul class="inner-sub-category">
+
+                                                        <li class=""><a href="product-grids.html">gfdgdfg</a></li>
+
+                                                        </ul>
+
+                                                </li>
+                                            @endforeach
+
+                                        </ul>
+                                    @endif
+
                                 </li>
                             @endforeach
 
