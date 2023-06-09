@@ -8,7 +8,7 @@ use PDF;
 
 class AdminOrderController extends Controller
 {
-    private $mpdf;
+    private $pdf;
     public function index()
     {
         return view('admin.order.index',['orders'=>Order::orderBy('id','desc')->get()]);
@@ -33,10 +33,8 @@ class AdminOrderController extends Controller
     }
     public function downloadInvoice($id)
     {
-        $data = ['name'=> 'bitm'];
-      $this->mpdf = PDF::loadView('admin.order.download-invoice', $data);
-
-        return  $this->mpdf->stream('document.pdf');
+        $this->pdf = Pdf::loadView('admin.order.download-invoice', ['order'=>Order::find($id)]);
+        return  $this->pdf->stream('invoice-00'.$id.'.pdf');
 
         return view('admin.order.download-invoice');
     }
