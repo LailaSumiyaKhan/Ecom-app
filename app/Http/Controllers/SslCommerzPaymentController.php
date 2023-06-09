@@ -186,7 +186,7 @@ class SslCommerzPaymentController extends Controller
         echo "Transaction is Successful";
 
         $tran_id = $request->input('tran_id');
-        $amount = $request->input('total_amount');
+        $amount = $request->input('amount');
         $currency = $request->input('currency');
 
         $sslc = new SslCommerzNotification();
@@ -296,6 +296,7 @@ class SslCommerzPaymentController extends Controller
                         ->update(['order_status' => 'Processing']);
 
                     echo "Transaction is successfully Completed";
+                    return redirect('/complete-order');
                 }
             } else if ($order_details->order_status == 'Processing' || $order_details->order_status == 'Complete') {
 
