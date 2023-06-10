@@ -16,6 +16,7 @@ use App\Http\Controllers\CustomerDashboardController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\SubsubcategoryController;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\AdminCustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,6 +123,9 @@ Route::middleware([
     Route::get('/admin/order-invoice/{id}',[AdminOrderController::class,'invoice'])->name('admin.order-invoice');
     Route::get('/admin/download-order-invoice/{id}',[AdminOrderController::class,'downloadInvoice'])->name('admin.download-invoice');
     Route::get('/admin/order-delete/{id}',[AdminOrderController::class,'delete'])->name('admin.order-delete');
+    Route::get('/admin/manage-customer',[AdminCustomerController::class,'index'])->name('admin.manage-customer');
+    Route::get('/admin/customer-detail/{id}',[AdminCustomerController::class,'detail'])->name('admin.customer-detail');
+    Route::get('/admin/customer-delete/{id}',[AdminCustomerController::class,'delete'])->name('admin.customer-delete');
 
 });
 

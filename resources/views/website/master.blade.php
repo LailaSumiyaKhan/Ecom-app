@@ -242,14 +242,13 @@
                                                             <i class="lni lni-chevron-right"></i>
                                                         @endif
                                                     </a>
-
-
+                                                    @if(count($subcategory->subsubCategories) > 0)
                                                         <ul class="inner-sub-category">
-
-                                                        <li class=""><a href="product-grids.html">gfdgdfg</a></li>
-
+                                                            @foreach($subcategory->subsubCategories as $subsubCategory)
+                                                        <li class=""><a href="product-grids.html">{{$subsubCategory->name}}</a></li>
+                                                            @endforeach
                                                         </ul>
-
+                                                    @endif
                                                 </li>
                                             @endforeach
 

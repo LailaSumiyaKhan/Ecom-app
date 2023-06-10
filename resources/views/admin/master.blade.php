@@ -550,7 +550,7 @@
                             <span>Customer Module</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="tasks-list.html">Manage Castomer</a></li>
+                            <li><a href="{{route('admin.manage-customer')}}">Manage Castomer</a></li>
 
                         </ul>
                     </li>

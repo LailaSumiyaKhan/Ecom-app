@@ -200,9 +200,31 @@
                                         <div class="single-product">
                                             <div class="product-image">
                                                 <img src="{{asset($product->image)}}" alt="#" height="220">
-                                                <div class="button">
-                                                    <a href="" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
-                                                </div>
+
+
+                                                <form action="{{route('add-to-cart',['id'=>$product->id])}}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="qty" value="1"/>
+                                                    <div class="button">
+                                                        <button type="submit" class="btn"><i class="lni lni-cart"></i> Add to Cart</button>
+                                                    </div>
+
+                                                </form>
+
+
+
+
+
+
+
+
+
+
+
+
+{{--                                                <div class="button">--}}
+{{--                                                    <a href="" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>--}}
+{{--                                                </div>--}}
                                             </div>
                                             <div class="product-info">
                                                 <span class="category">Watches</span>

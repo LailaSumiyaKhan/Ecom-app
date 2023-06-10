@@ -13,9 +13,9 @@ class EcommerceController extends Controller
 
     public function index()
     {
-
+        $this->categories = Category::orderBy('id','desc')->take(8)->get();
         $this->products = Product::orderBy('id','desc')->take(8)->get(['id','name','category_id','selling_price','image']);
-        return view('website.home.index',['products'=>$this->products]);
+        return view('website.home.index',['products'=>$this->products],['categories'=>$this->categories]);
     }
     public function category($id)
     {

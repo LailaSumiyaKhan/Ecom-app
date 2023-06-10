@@ -10,7 +10,7 @@ class Customer extends Model
 {
     use HasFactory;
 
-    private static $customer,$image ,$imageName , $imageExtension,$imageUrl ,$directory;
+    private static $customer,$customers,$image ,$imageName , $imageExtension,$imageUrl ,$directory;
     public  static function getImageUrl($request)
     {
         self::$image = $request->file('image');
@@ -65,5 +65,15 @@ class Customer extends Model
         self::$customer->blood_group    = $request->blood_group;
         self::$customer->save();
     }
+    public static function deleteCustomer($id)
+    {
+        self::$customer = Customer::find($id);
+        self::$customer->delete();
+    }
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
+
 
 }
